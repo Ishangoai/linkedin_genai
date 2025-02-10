@@ -41,7 +41,7 @@ reportMissingTypeStubs = false
 colorOutput = true
 
 [tool.ruff]
-line-length = 98
+line-length = 120
 select = ["E", "F", "W", "C90"]
 ignore = ["E501"]
 
