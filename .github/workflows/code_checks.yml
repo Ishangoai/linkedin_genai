@@ -29,13 +29,13 @@ jobs:
         python-version-file: "pyproject.toml"
         
     - name: run ruff code checks
-      run: uvx ruff check
+      run: uvx ruff@0.9.5 check
 
     - name: run pyright type-hinting checks
-      run: uvx pyright
+      run: uvx pyright@1.1.393
 
     - name: Run pytest
-      run: uvx pytest
+      run: uvx pytest@8.3.4
 
     - name: list python packages
       run: uv pip list
