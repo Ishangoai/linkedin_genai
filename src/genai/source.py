@@ -1,5 +1,5 @@
 def add_one(number):
-    return number + 1
+    return number + 1+3
 
 def main():
     result = add_one(1)
