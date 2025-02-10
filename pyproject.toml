@@ -42,7 +42,6 @@ build-backend = "setuptools.build_meta"
 [tool.pytest.ini_options]
 testpaths = ["tests"]
 addopts = "-vv -cov"
-pythonpath = ["."]
 
 [tool.pyright]
 pythonVersion = "3.12"
