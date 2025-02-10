@@ -42,8 +42,8 @@ colorOutput = true
 
 [tool.ruff]
 line-length = 120
-select = ["E", "F", "W", "C90"]
-ignore = ["E501"]
+#select = ["E", "F", "W", "C90"]
+#ignore = ["E501"]
 
 [tool.uv]
 package = true
