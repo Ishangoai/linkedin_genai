@@ -15,6 +15,7 @@ dependencies = [
     "numpy>=2.2.2",
     "pyright>=1.1.393",
     "pytest>=8.3.4",
+    "pytest-cov>=6.0.0",
     "ruff>=0.9.5",
     "scipy>=1.15.1",
 ]
@@ -31,7 +32,7 @@ build-backend = "setuptools.build_meta"
 
 [tool.pytest.ini_options]
 testpaths = ["tests"]
-addopts = "-vv -cov"
+addopts = "-v --cov"
 
 [tool.pyright]
 exclude = []
@@ -50,5 +51,6 @@ preview = true
 #this is a replacement for black. not sure whether to use it.
 #[tool.ruff.format]
 
+# not yet sure what this does
 [tool.uv]
 package = true
