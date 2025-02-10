@@ -23,11 +23,13 @@ jobs:
       with:
         version: "0.5.29"
 
-    - name: Install Python
-      run: uv python install
+    - name: Set up Python 3.12
+      uses: actions/setup-python@v5
+      with:
+        python-version: "3.12"
         
     - name: Install package
-      run: uv pip install '.[test]'
+      run: uv pip install '.[test]' --system
         uv pip list
         
     - name: Run ruff code checks
