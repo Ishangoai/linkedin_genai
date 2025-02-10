@@ -29,7 +29,8 @@ jobs:
         python-version: "3.12"
         
     - name: Install package
-      run: uv pip install '.[test]' --system
+      run: | 
+        uv pip install '.[test]' --system
         uv pip list
         
     - name: Run ruff code checks
