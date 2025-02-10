@@ -14,20 +14,20 @@ authors =  [
 dependencies = [
     "numpy>=2.2.2",
     "pyright>=1.1.393",
-    "pytest>=7.4.3",
-    "ruff>=0.9.5",
+    #"pytest>=7.4.3",
+    #"ruff>=0.9.5",
     "scipy>=1.15.1",
 ]
 
 [project.urls]
 Homepage = "https://ishango.ai/"
 
-[project.optional-dependencies]
-test = [
-    "ruff>=0.9.5",
-    "pytest>=7.4.3",
-    "pytest-cov>=4.1.0",
-]
+# [project.optional-dependencies]
+# test = [
+#     "ruff>=0.9.5",
+#     "pytest>=7.4.3",
+#     "pytest-cov>=4.1.0",
+# ]
 
 [project.scripts]
 genai = "genai.source:main"
