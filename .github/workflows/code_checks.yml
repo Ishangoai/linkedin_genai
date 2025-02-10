@@ -34,7 +34,7 @@ jobs:
     #     uv pip list
         
     - name: Run ruff code checks
-      run: ruff check
+      run: uv run ruff check
 
     - name: Run pyright type-hinting checks
       run: pyright
