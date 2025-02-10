@@ -28,10 +28,10 @@ jobs:
       with:
         python-version-file: "pyproject.toml"
         
-    - name: Install package
-      run: | 
-        uv pip install '.[test]' --system
-        uv pip list
+    # - name: Install package
+    #   run: | 
+    #     uv pip install '.[test]' --system
+    #     uv pip list
         
     - name: Run ruff code checks
       run: ruff check
