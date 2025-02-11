@@ -12,4 +12,4 @@ Other tips:
 - type `pyright` to run type-hinting checks
 - type `genai` run run the module (see the `[project.scripts]` section in `pyproject.toml`
 
-All these checks are also run in GitHub Actions (CI pipelines) when a new PR is raised to merge into `development`
+All these checks are also run in GitHub Actions (CI pipelines) when a new PR is raised to merge into `development`)
