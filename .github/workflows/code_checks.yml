@@ -28,8 +28,8 @@ jobs:
       with:
         python-version-file: "pyproject.toml"
 
-    - name: install package
-      run: uv pip install .
+    - name: install python packages
+      run: uv sync --system
       
     - name: run ruff code checks
       run: ruff check
