@@ -4,7 +4,7 @@ version = "0.1.0"
 license = {file = "LICENSE"}
 description = "GenAI LinkedIn Post Writer"
 readme = "README.md"
-requires-python = ">=3.12"
+requires-python = "==3.12"
 
 authors =  [
     {name = "Oliver Angelil", email = "oliver@ishango.ai"},
@@ -12,12 +12,12 @@ authors =  [
 ]
 
 dependencies = [
-    "numpy>=2.2.2",
-    "pyright>=1.1.393",
-    "pytest>=8.3.4",
-    "ruff>=0.9.5",
-    "scipy>=1.15.1",
-    "google-genai>=1.0.0",
+    "numpy==2.2.2",
+    "pyright==1.1.394",
+    "pytest==8.3.4",
+    "ruff==0.9.5",
+    "scipy==1.15.1",
+    "google-genai==1.0.0",
 ]
 
 [project.urls]
@@ -35,7 +35,7 @@ testpaths = ["tests"]
 addopts = "-vv"
 
 [tool.pyright]
-exclude = ["genai"]
+exclude = []
 typeCheckingMode = "basic"
 reportUntypedFunctionDecorator = false
 reportMissingTypeStubs = false
