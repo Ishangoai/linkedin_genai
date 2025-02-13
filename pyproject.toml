@@ -48,7 +48,7 @@ line-length = 120
 select = ["E", "F", "W", "C90"]
 preview = true
 
-#this is a replacement for black. not sure whether to use it.
+#this is a replacement for black. not sure whether to use it
 #[tool.ruff.format]
 
 # not yet sure what this does
