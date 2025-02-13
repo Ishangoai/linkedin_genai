@@ -1,5 +1,5 @@
 [project]
-name = "genai"
+name = "genai_linkedin"
 version = "0.1.0"
 license = {file = "LICENSE"}
 description = "GenAI LinkedIn Post Writer"
@@ -24,7 +24,7 @@ dependencies = [
 Homepage = "https://ishango.ai/"
 
 [project.scripts]
-genai = "genai.source:main"
+genai_linkedin = "genai_linkedin.source:main"
 
 [build-system]
 requires = ["setuptools"]
@@ -48,7 +48,7 @@ line-length = 120
 select = ["E", "F", "W", "C90"]
 preview = true
 
-#this is a replacement for black. not sure whether to use it.
+#this is a replacement for black. not sure whether to use it
 #[tool.ruff.format]
 
 # not yet sure what this does

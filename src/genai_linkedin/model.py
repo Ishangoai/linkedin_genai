@@ -3,7 +3,6 @@ from typing import Union
 from google import genai
 from google.genai.types import Tool, GenerateContentConfig, GoogleSearch
 
-
 client = genai.Client(api_key=os.environ["GEMINI_API_KEY"])
 
 google_search_tool = Tool(
