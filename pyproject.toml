@@ -35,7 +35,7 @@ testpaths = ["tests"]
 addopts = "-vv"
 
 [tool.pyright]
-exclude = []
+exclude = ["genai"]
 typeCheckingMode = "basic"
 reportUntypedFunctionDecorator = false
 reportMissingTypeStubs = false
