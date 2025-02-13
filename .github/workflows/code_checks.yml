@@ -30,16 +30,18 @@ jobs:
 
     - name: install python packages
       run: uv pip install . --system
-      
-    - name: run ruff code checks
-      run: ruff check
-  
-    - name: run pyright type-hinting checks
-      run: pyright
-
-    - name: Run pytest
-      run: pytest
 
     - name: list python packages
       run: uv pip list
+
+    - name: run ruff code checks
+      run: uv run ruff check
+  
+    - name: run pyright type-hinting checks
+      run: uv run pyright
+
+    - name: Run pytest
+      run: uv run pytest
+
+
         
