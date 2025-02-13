@@ -35,13 +35,13 @@ jobs:
       run: uv pip list
 
     - name: run ruff code checks
-      run: uv run ruff check
+      run: ruff check
   
     - name: run pyright type-hinting checks
-      run: uv run pyright
+      run: pyright
 
     - name: Run pytest
-      run: uv run pytest
+      run: pytest
 
 
         
