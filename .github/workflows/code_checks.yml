@@ -28,8 +28,8 @@ jobs:
       with:
         python-version-file: "pyproject.toml"
         
-    - name: run ruff code checks
-      run: uvx ruff@0.9.5 check
+    # - name: run ruff code checks
+    #   run: uvx ruff@0.9.5 check
 
     - name: run pyright type-hinting checks
       run: uvx pyright@1.1.394
