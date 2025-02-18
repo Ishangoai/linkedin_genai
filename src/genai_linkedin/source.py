@@ -1,4 +1,4 @@
-from .model import generate_post_about, generate_technical_guide_about
+from genai_linkedin.model import generate_post_about, generate_technical_guide_about
 
 
 def main():

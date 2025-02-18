@@ -1,15 +1,16 @@
 import os
-from typing import Union
-from google import genai
-from google.genai.types import Tool, GenerateContentConfig, GoogleSearch
+import typing
+import google.genai as google_genai
+import google.genai.types as google_genai_types
 
-client = genai.Client(api_key=os.environ["GEMINI_API_KEY"])
 
-google_search_tool = Tool(
-    google_search=GoogleSearch()
+client = google_genai.Client(api_key=os.environ["GEMINI_API_KEY"])
+
+google_search_tool = google_genai_types.Tool(
+    google_search=google_genai_types.GoogleSearch()
 )
 
-generation_config = GenerateContentConfig(
+generation_config = google_genai_types.GenerateContentConfig(
   temperature=1,
   top_p=0.95,
   top_k=40,
@@ -25,7 +26,7 @@ generation_config = GenerateContentConfig(
 )
 
 
-def generate_post(contents: Union[str, list[str]]) -> str | None:
+def generate_post(contents: typing.Union[str, list[str]]) -> str | None:
     response = client.models.generate_content(
         model="gemini-2.0-flash",
         contents=contents,
