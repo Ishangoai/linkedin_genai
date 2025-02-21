@@ -1,19 +1,26 @@
-FROM python:3.12.9
+FROM python:3.12.9-slim
+COPY --from=ghcr.io/astral-sh/uv:latest /uv /uvx /bin/
 
 WORKDIR /app
 
 # Copy only the essential files first for Docker layer caching.
 COPY pyproject.toml .
+
+# Install dependencies
+RUN --mount=type=cache,target=/root/.cache/uv \
+    --mount=type=bind,source=uv.lock,target=uv.lock \
+    --mount=type=bind,source=pyproject.toml,target=pyproject.toml \
+    uv sync --frozen --no-install-project
+
+# Copy the project into the image
 COPY . .
 
-# Install system dependencies if any (example)
-# RUN apt-get update && apt-get install -y --no-install-recommends libpq-dev  # If needed
-
-# Install project dependencies using pip (and uv)
-RUN pip install -U uv && uv pip install .
+# Sync the project
+RUN --mount=type=cache,target=/root/.cache/uv \
+    uv sync --frozen
 
 # Expose the port your application uses
-EXPOSE 8000
+# EXPOSE 8000
 
 # Define the command to run when the container starts
 # CMD ["uvicorn", "src.main:app", "--host", "0.0.0.0", "--port", "8000"] # Example using uvicorn
