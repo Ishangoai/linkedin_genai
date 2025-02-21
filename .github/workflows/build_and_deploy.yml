@@ -47,7 +47,7 @@ env:
   # DEPLOYMENT_NAME: 'gke-test' # update to your deployment name
   REPOSITORY: 'linkedin-genai-gcr'
   IMAGE: 'linkedin-genai-image'
-  WORKLOAD_IDENTITY_PROVIDER: 'projects/123456789/locations/global/workloadIdentityPools/my-pool/providers/my-provider' # TODO: update to your workload identity provider
+  WORKLOAD_IDENTITY_PROVIDER: 'projects/427938065788/locations/global/workloadIdentityPools/linkedin-genai-pool/providers/github' # TODO: update to your workload identity provider
 
 jobs:
   setup-build-publish-deploy:
