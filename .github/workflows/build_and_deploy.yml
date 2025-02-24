@@ -41,7 +41,7 @@ on:
 
 env:
   PROJECT_ID: 'linkedin-genai'
-  GAR_LOCATION: 'us-central1'
+  GAR_LOCATION: 'europe-west2'
   # GKE_CLUSTER: 'cluster-1' #  update to your cluster name
   # GKE_ZONE: 'us-central1-c' # update to your cluster zone
   # DEPLOYMENT_NAME: 'gke-test' # update to your deployment name
