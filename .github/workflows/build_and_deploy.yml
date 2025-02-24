@@ -90,7 +90,7 @@ jobs:
       #     location: '${{ env.GKE_ZONE }}'
 
       # Build the Docker image
-      - name: 'Build and push Docker container'
+      - name: 'Build Docker container'
         run: |-
           DOCKER_TAG="${GAR_LOCATION}-docker.pkg.dev/${PROJECT_ID}/${REPOSITORY}/${IMAGE}:${GITHUB_SHA}"
 
@@ -100,7 +100,9 @@ jobs:
             --build-arg GITHUB_REF="${GITHUB_REF}" \
             .
 
-          docker push "${DOCKER_TAG}"
+
+      - name: 'push Docker container'
+        run: docker push "${DOCKER_TAG}"
 
       # # Set up kustomize
       # - name: 'Set up Kustomize'
