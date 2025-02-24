@@ -102,7 +102,9 @@ jobs:
 
 
       - name: 'push Docker container'
-        run: docker push "${DOCKER_TAG}"
+        run: |-
+          DOCKER_TAG="${GAR_LOCATION}-docker.pkg.dev/${PROJECT_ID}/${REPOSITORY}/${IMAGE}:${GITHUB_SHA}"
+          docker push "${DOCKER_TAG}"
 
       # # Set up kustomize
       # - name: 'Set up Kustomize'
