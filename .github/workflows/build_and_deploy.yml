@@ -38,20 +38,16 @@
 #    - select both permissions
 #    - click analyze
 
-name: 'Build and Deploy to GKE'
+name: 'Build and Deploy to GAR'
 
 on:
   push:
     branches:
       - 'development'
-      - 'development-test-pipeline'
 
 env:
   PROJECT_ID: 'linkedin-genai'
   GAR_LOCATION: 'europe-west2'
-  # GKE_CLUSTER: 'cluster-1' #  update to your cluster name
-  # GKE_ZONE: 'us-central1-c' # update to your cluster zone
-  # DEPLOYMENT_NAME: 'gke-test' # update to your deployment name
   REPOSITORY: 'linkedin-genai-gcr'
   IMAGE: 'linkedin-genai-image'
   WORKLOAD_IDENTITY_PROVIDER: 'projects/427938065788/locations/global/workloadIdentityPools/linkedin-genai-pool/providers/github' # TODO: update to your workload identity provider
@@ -89,13 +85,6 @@ jobs:
           password: '${{ steps.auth.outputs.auth_token }}'
           registry: '${{ env.GAR_LOCATION }}-docker.pkg.dev'
 
-      # # Get the GKE credentials so we can deploy to the cluster
-      # - name: 'Set up GKE credentials'
-      #   uses: 'google-github-actions/get-gke-credentials@6051de21ad50fbb1767bc93c11357a49082ad116' # google-github-actions/get-gke-credentials@v2
-      #   with:
-      #     cluster_name: '${{ env.GKE_CLUSTER }}'
-      #     location: '${{ env.GKE_ZONE }}'
-
       - name: 'Debug Token and Account'
         run: |
           # Log the token (masked for security, truncated)
@@ -125,23 +114,7 @@ jobs:
           # Log the Docker tag for confirmation
           echo "Docker Tag: ${GAR_LOCATION}-docker.pkg.dev/${PROJECT_ID}/${REPOSITORY}/${IMAGE}:${GITHUB_SHA}"
 
-
       - name: 'push Docker container'
         run: |-
           DOCKER_TAG="${GAR_LOCATION}-docker.pkg.dev/${PROJECT_ID}/${REPOSITORY}/${IMAGE}:${GITHUB_SHA}"
           docker push "${DOCKER_TAG}"
-
-      # # Set up kustomize
-      # - name: 'Set up Kustomize'
-      #   run: |-
-      #     curl -sfLo kustomize https://github.com/kubernetes-sigs/kustomize/releases/download/kustomize%2Fv5.4.3/kustomize_v5.4.3_linux_amd64.tar.gz
-      #     chmod u+x ./kustomize
-
-      # # Deploy the Docker image to the GKE cluster
-      # - name: 'Deploy to GKE'
-      #   run: |-
-      #     # replacing the image name in the k8s template
-      #     ./kustomize edit set image LOCATION-docker.pkg.dev/PROJECT_ID/REPOSITORY/IMAGE:TAG=$GAR_LOCATION-docker.pkg.dev/$PROJECT_ID/$REPOSITORY/$IMAGE:$GITHUB_SHA
-      #     ./kustomize build . | kubectl apply -f -
-      #     kubectl rollout status deployment/$DEPLOYMENT_NAME
-      #     kubectl get services -o wide
