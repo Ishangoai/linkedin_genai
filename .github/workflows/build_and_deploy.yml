@@ -44,10 +44,13 @@ on:
   push:
     branches:
       - 'development'
+      - 'feature-branch-vincent'
 
 env:
   PROJECT_ID: 'linkedin-genai'
   GAR_LOCATION: 'europe-west2'
+  CLOUD_RUN_SERVICE: 'linkedin-genai-service'
+  CLOUD_RUN_REGION: 'europe-west2'
   REPOSITORY: 'linkedin-genai-gcr'
   IMAGE: 'linkedin-genai-image'
   WORKLOAD_IDENTITY_PROVIDER: 'projects/427938065788/locations/global/workloadIdentityPools/linkedin-genai-pool/providers/github' # TODO: update to your workload identity provider
@@ -118,3 +121,13 @@ jobs:
         run: |-
           DOCKER_TAG="${GAR_LOCATION}-docker.pkg.dev/${PROJECT_ID}/${REPOSITORY}/${IMAGE}:${GITHUB_SHA}"
           docker push "${DOCKER_TAG}"
+
+      - name: 'Deploy to Cloud Run'
+        run: |
+          gcloud run deploy ${{ env.CLOUD_RUN_SERVICE }} \
+            --image ${{ env.GAR_LOCATION }}-docker.pkg.dev/${{ env.PROJECT_ID }}/${{ env.REPOSITORY }}/${{ env.IMAGE }}:${{ github.sha }} \
+            --region ${{ env.CLOUD_RUN_REGION }} \
+            --platform managed \
+            --allow-unauthenticated \
+            --set-env-vars GEMINI_API_KEY=${{ secrets.GEMINI_API_KEY }} \
+            --project ${{ env.PROJECT_ID }}
