@@ -54,7 +54,6 @@ on:
   push:
     branches:
       - 'development'
-      - 'feature-branch-vincent'
 
 env:
   PROJECT_ID: 'linkedin-genai'
