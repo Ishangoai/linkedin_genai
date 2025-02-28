@@ -4,7 +4,7 @@ from slack_sdk import WebClient
 from slack_sdk.errors import SlackApiError
 
 SLACK_TOKEN = os.environ["SLACK_API_TOKEN"]
-CHANNEL = "#general"  # Replace with your channel name
+CHANNEL = "#linkedin_posts"  # Replace with your channel name
 
 # Initialize the Slack client
 client = WebClient(token=SLACK_TOKEN)
