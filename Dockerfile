@@ -23,5 +23,5 @@ RUN --mount=type=cache,target=/root/.cache/uv \
 EXPOSE 8080
 
 # Define the command to run when the container starts
-CMD ["uvicorn", "src.genai_linkedin.main:app", "--host", "0.0.0.0", "--port", "8080"] # Example using uvicorn
+CMD ["uv", "run", "uvicorn", "src.genai_linkedin.main:app", "--host", "0.0.0.0", "--port", "8080"] # Example using uvicorn
 # CMD ["genai_linkedin"]
