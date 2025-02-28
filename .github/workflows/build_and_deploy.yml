@@ -37,6 +37,16 @@
 #    - click continue
 #    - select both permissions
 #    - click analyze
+#
+# 4. Add the following secrets to your repository's secrets configuration:
+#
+#    - GEMINI_API_KEY: The API key for the Gemini API.
+#
+# 5. Create a cloud run instance & a service account to manage the instance & Grant the workload Identity Pool the permission to impersonate the service account 
+# $ gcloud iam service-accounts add-iam-policy-binding  linkedin-genai-service@linkedin-genai.iam.gserviceaccount.com \
+# --member="principalSet://iam.googleapis.com/projects/427938065788/locations/global/workloadIdentityPools/linkedin-genai-pool/attribute.repository/Ishangoai/linkedin_genai" \
+# --role="roles/iam.serviceAccountTokenCreator" \
+# --project=linkedin-genai
 
 name: 'Build and Deploy to GAR'
 
@@ -48,6 +58,8 @@ on:
 env:
   PROJECT_ID: 'linkedin-genai'
   GAR_LOCATION: 'europe-west2'
+  CLOUD_RUN_SERVICE: 'linkedin-genai-service'
+  CLOUD_RUN_REGION: 'europe-west2'
   REPOSITORY: 'linkedin-genai-gcr'
   IMAGE: 'linkedin-genai-image'
   WORKLOAD_IDENTITY_PROVIDER: 'projects/427938065788/locations/global/workloadIdentityPools/linkedin-genai-pool/providers/github' # TODO: update to your workload identity provider
@@ -75,7 +87,7 @@ jobs:
         uses: 'google-github-actions/auth@f112390a2df9932162083945e46d439060d66ec2' # google-github-actions/auth@v2
         with:
           workload_identity_provider: '${{ env.WORKLOAD_IDENTITY_PROVIDER }}'
-          service_account: 'linkedin-genai-gh-sa@linkedin-genai.iam.gserviceaccount.com'
+          service_account: 'linkedin-genai-service@linkedin-genai.iam.gserviceaccount.com'
 
       # Authenticate Docker to Google Cloud Artifact Registry
       - name: 'Docker Auth'
@@ -118,3 +130,13 @@ jobs:
         run: |-
           DOCKER_TAG="${GAR_LOCATION}-docker.pkg.dev/${PROJECT_ID}/${REPOSITORY}/${IMAGE}:${GITHUB_SHA}"
           docker push "${DOCKER_TAG}"
+
+      - name: 'Deploy to Cloud Run'
+        run: |
+          gcloud run deploy ${{ env.CLOUD_RUN_SERVICE }} \
+            --image ${{ env.GAR_LOCATION }}-docker.pkg.dev/${{ env.PROJECT_ID }}/${{ env.REPOSITORY }}/${{ env.IMAGE }}:${{ github.sha }} \
+            --region ${{ env.CLOUD_RUN_REGION }} \
+            --platform managed \
+            --allow-unauthenticated \
+            --set-env-vars GEMINI_API_KEY=${{ secrets.GEMINI_API_KEY }} \
+            --project ${{ env.PROJECT_ID }}
