@@ -37,6 +37,16 @@
 #    - click continue
 #    - select both permissions
 #    - click analyze
+#
+# 4. Add the following secrets to your repository's secrets configuration:
+#
+#    - GEMINI_API_KEY: The API key for the Gemini API.
+#
+# 5. Create a cloud run instance & a service account to manage the instance & Grant the workload Identity Pool the permission to impersonate the service account 
+# $ gcloud iam service-accounts add-iam-policy-binding  linkedin-genai-service@linkedin-genai.iam.gserviceaccount.com \
+# --member="principalSet://iam.googleapis.com/projects/427938065788/locations/global/workloadIdentityPools/linkedin-genai-pool/attribute.repository/Ishangoai/linkedin_genai" \
+# --role="roles/iam.serviceAccountTokenCreator" \
+# --project=linkedin-genai
 
 name: 'Build and Deploy to GAR'
 
