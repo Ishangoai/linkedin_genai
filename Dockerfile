@@ -20,7 +20,7 @@ RUN --mount=type=cache,target=/root/.cache/uv \
     uv sync --frozen
 
 # Expose the port your application uses
-# EXPOSE 8000
+EXPOSE 8080
 
 # Define the command to run when the container starts
 CMD ["uvicorn", "src.genai_linkedin.main:app", "--host", "0.0.0.0", "--port", "8080"] # Example using uvicorn
