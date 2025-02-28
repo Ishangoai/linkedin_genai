@@ -20,6 +20,7 @@ dependencies = [
     "google-genai==1.0.0",
     "fastapi",
     "uvicorn",
+    "slack_sdk",
 ]
 
 [project.urls]
