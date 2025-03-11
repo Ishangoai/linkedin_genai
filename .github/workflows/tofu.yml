@@ -1,0 +1,58 @@
+name: OpenTofu Workflow
+
+on:
+  push:
+    branches:
+      - development
+    paths:
+      - 'opentofu/**.tf'
+      - 'opentofu/**.tfvars'
+  pull_request:
+    branches:
+      - development
+    paths:
+      - 'opentofu/**.tf'
+      - 'opentofu/**.tfvars'
+
+jobs:
+  tofu:
+    name: OpenTofu Plan & Apply
+    runs-on: ubuntu-latest
+    environment: production
+    permissions:
+      contents: 'read'
+      id-token: 'write'
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v4
+
+      - name: Setup OpenTofu
+        uses: hashicorp/setup-opentofu@v2
+        with:
+          tofu_version: latest
+
+      - id: 'auth'
+        name: 'Authenticate to Google Cloud'
+        uses: 'google-github-actions/auth@v2'
+        with:
+          workload_identity_provider: 'projects/427938065788/locations/global/workloadIdentityPools/linkedin-genai-pool/providers/github'
+          service_account: 'linkedin-genai-service@linkedin-genai.iam.gserviceaccount.com'
+
+      - name: Configure gcloud
+        run: |
+          gcloud auth activate-service-account ${{ secrets.SERVICE_ACCOUNT_EMAIL }} --impersonate-service-account=${{ secrets.SERVICE_ACCOUNT_EMAIL }} --scopes=https://www.googleapis.com/auth/cloud-platform
+          gcloud config set project linkedin-genai
+
+      - name: Tofu Init
+        run: tofu init
+
+      - name: Tofu Format
+        run: tofu fmt -check
+
+      - name: Tofu Plan
+        if: github.event_name == 'pull_request'
+        run: tofu plan -var="billing_account=${{ secrets.BILLING_ACCOUNT }}" -var="org_id=${{ secrets.ORG_ID }}"
+
+      - name: Tofu Apply
+        if: github.ref == 'refs/heads/main' && github.event_name == 'push'
+        run: tofu apply -auto-approve -var="billing_account=${{ secrets.BILLING_ACCOUNT }}" -var="org_id=${{ secrets.ORG_ID }}"
