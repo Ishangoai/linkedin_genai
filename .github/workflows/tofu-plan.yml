@@ -20,6 +20,9 @@ jobs:
       - name: Checkout code
         uses: actions/checkout@v4
 
+      - name: Change Directory
+        run: cd opentofu
+
       - name: Setup OpenTofu
         uses: opentofu/setup-opentofu@v1
         with:
