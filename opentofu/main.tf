@@ -108,3 +108,14 @@ resource "google_cloud_run_v2_service" "linkedin_genai_service" {
   }
 }
 # terraform import google_cloud_run_v2_service.linkedin_genai_service projects/linkedin-genai/locations/europe-west2/services/linkedin-genai-service
+
+resource "google_storage_bucket" "linkedin_genai_bucket" {
+  force_destroy               = false
+  location                    = "EUROPE-WEST2"
+  name                        = "linkedin_genai_bucket"
+  project                     = "linkedin-genai"
+  public_access_prevention    = "enforced"
+  storage_class               = "STANDARD"
+  uniform_bucket_level_access = true
+}
+# terraform import google_storage_bucket.linkedin_genai_bucket linkedin_genai_bucket
