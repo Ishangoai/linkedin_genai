@@ -20,9 +20,6 @@ jobs:
       - name: Checkout code
         uses: actions/checkout@v4
 
-      - name: Change Directory
-        run: cd opentofu
-
       - name: Setup OpenTofu
         uses: opentofu/setup-opentofu@v1
         with:
@@ -41,12 +38,12 @@ jobs:
 
       - name: Tofu Init
         run: tofu init
+        working-directory: opentofu
 
       - name: Tofu Format
         run: tofu fmt -check
-
-      - name: Verify Working Directory
-        run: pwd
+        working-directory: opentofu
 
       - name: Tofu Plan
-        run: cd opentofu && tofu plan -var="billing_account=${{ secrets.BILLING_ACCOUNT }}" -var="org_id=${{ secrets.ORG_ID }}"
+        run: tofu plan -var="billing_account=${{ secrets.BILLING_ACCOUNT }}" -var="org_id=${{ secrets.ORG_ID }}"
+        working-directory: opentofu
