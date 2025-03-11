@@ -1,12 +1,6 @@
-name: OpenTofu Workflow
+name: OpenTofu Plan
 
 on:
-  push:
-    branches:
-      - development
-    paths:
-      - 'opentofu/**.tf'
-      - 'opentofu/**.tfvars'
   pull_request:
     branches:
       - development
@@ -15,8 +9,8 @@ on:
       - 'opentofu/**.tfvars'
 
 jobs:
-  tofu:
-    name: OpenTofu Plan & Apply
+  tofu_plan:
+    name: OpenTofu Plan
     runs-on: ubuntu-latest
     environment: production
     permissions:
@@ -50,9 +44,4 @@ jobs:
         run: tofu fmt -check
 
       - name: Tofu Plan
-        if: github.event_name == 'pull_request'
         run: tofu plan -var="billing_account=${{ secrets.BILLING_ACCOUNT }}" -var="org_id=${{ secrets.ORG_ID }}"
-
-      - name: Tofu Apply
-        if: github.ref == 'refs/heads/main' && github.event_name == 'push'
-        run: tofu apply -auto-approve -var="billing_account=${{ secrets.BILLING_ACCOUNT }}" -var="org_id=${{ secrets.ORG_ID }}"
