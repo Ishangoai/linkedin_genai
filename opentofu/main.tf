@@ -23,8 +23,8 @@ variable "org_id" {
 
 terraform {
   backend "gcs" {
-    bucket  = "linkedin_genai_bucket"
-    prefix  = "terraform/state"
+    bucket = "linkedin_genai_bucket"
+    prefix = "terraform/state"
   }
 }
 
