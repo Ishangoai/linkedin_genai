@@ -4,9 +4,9 @@ on:
   pull_request:
     branches:
       - development
-#    paths:
-#      - 'opentofu/**.tf'
-#      - 'opentofu/**.tfvars'
+    paths:
+      - 'opentofu/**.tf'
+      - 'opentofu/**.tfvars'
 
 jobs:
   tofu_plan:
@@ -34,7 +34,6 @@ jobs:
 
       - name: Configure gcloud
         run: |
-          gcloud auth activate-service-account ${{ secrets.SERVICE_ACCOUNT_EMAIL }} --impersonate-service-account=${{ secrets.SERVICE_ACCOUNT_EMAIL }} --scopes=https://www.googleapis.com/auth/cloud-platform
           gcloud config set project linkedin-genai
 
       - name: Tofu Init
