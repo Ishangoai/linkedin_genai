@@ -49,4 +49,4 @@ jobs:
         run: pwd
 
       - name: Tofu Plan
-        run: tofu plan -var="billing_account=${{ secrets.BILLING_ACCOUNT }}" -var="org_id=${{ secrets.ORG_ID }}"
+        run: cd opentofu && tofu plan -var="billing_account=${{ secrets.BILLING_ACCOUNT }}" -var="org_id=${{ secrets.ORG_ID }}"
