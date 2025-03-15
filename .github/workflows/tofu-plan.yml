@@ -5,17 +5,22 @@ on:
     branches:
       - development
     paths:
-      - 'opentofu/**.tf'
-      - 'opentofu/**.tfvars'
+      - "opentofu/**.tf"
+      - "opentofu/**.tfvars"
 
 jobs:
   tofu_plan:
     name: OpenTofu Plan
     runs-on: ubuntu-latest
     environment: production
+
     permissions:
-      contents: 'read'
-      id-token: 'write'
+      actions: read # Required to identify workflow run.
+      checks: write # Required to add status summary.
+      contents: read # Required to checkout repository.
+      id-token: write # Required to authenticate via OIDC.
+      pull-requests: write # Required to add comment and label.
+
     steps:
       - name: Checkout code
         uses: actions/checkout@v4
@@ -26,17 +31,16 @@ jobs:
           tofu_version: latest
           tofu_wrapper: false
 
-      - id: 'auth'
-        name: 'Authenticate to Google Cloud'
-        uses: 'google-github-actions/auth@v2'
+      - id: "auth"
+        name: "Authenticate to Google Cloud"
+        uses: "google-github-actions/auth@v2"
         with:
-          workload_identity_provider: 'projects/427938065788/locations/global/workloadIdentityPools/linkedin-genai-pool/providers/github'
-          service_account: 'linkedin-genai-service@linkedin-genai.iam.gserviceaccount.com'
+          workload_identity_provider: "projects/427938065788/locations/global/workloadIdentityPools/linkedin-genai-pool/providers/github"
+          service_account: "linkedin-genai-service@linkedin-genai.iam.gserviceaccount.com"
 
       # - name: Configure gcloud
       #   run: |
       #     gcloud config set project linkedin-genai
-
 
       - name: Plan Terraform
         uses: op5dev/tf-via-pr@v13
