@@ -48,6 +48,7 @@ jobs:
           arg-lock: false
           arg-var: billing_account=${{ secrets.BILLING_ACCOUNT }},org_id=${{ secrets.ORG_ID }}
           format: true
+          tool: tofu
 
       # - name: Tofu Init
       #   run: tofu init
