@@ -1,39 +1,3 @@
-# Variable definitions for sensitive data.
-variable "gemini_api_key" {
-  description = "API key for Gemini"
-  type        = string
-  sensitive   = true
-}
-
-variable "slack_api_token" {
-  description = "API token for Slack"
-  type        = string
-  sensitive   = true
-}
-
-variable "billing_account" {
-  description = "Billing account ID"
-  type        = string
-}
-
-variable "org_id" {
-  description = "Organization ID"
-  type        = string
-}
-
-terraform {
-  backend "gcs" {
-    bucket = "linkedin_genai_bucket"
-    prefix = "terraform/state"
-  }
-}
-
-# Provider configuration (optional, if not using Application Default Credentials)
-# provider "google" {
-#   project     = "linkedin-genai"
-#   # credentials = file("credentials.json")  # Uncomment if using a service account key
-# }
-
 resource "google_artifact_registry_repository" "linkedin_genai_gcr" {
   cleanup_policy_dry_run = true
   format                 = "DOCKER"
