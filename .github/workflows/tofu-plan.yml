@@ -32,9 +32,9 @@ jobs:
           workload_identity_provider: 'projects/427938065788/locations/global/workloadIdentityPools/linkedin-genai-pool/providers/github'
           service_account: 'linkedin-genai-service@linkedin-genai.iam.gserviceaccount.com'
 
-      - name: Configure gcloud
-        run: |
-          gcloud config set project linkedin-genai
+      # - name: Configure gcloud
+      #   run: |
+      #     gcloud config set project linkedin-genai
 
       - name: Tofu Init
         run: tofu init
