@@ -48,8 +48,8 @@ jobs:
         uses: op5dev/tf-via-pr@v13
         with:
           working-directory: opentofu
-          command: ${{ github.event_name == 'push' && 'apply' || 'plan' }}
-          arg-lock: ${{ github.event_name == 'push' }}
+          command: apply # ${{ github.event_name == 'push' && 'apply' || 'plan' }}
+          arg-lock: true # ${{ github.event_name == 'push' }}
           arg-lock-timeout: 5m
           arg-var: billing_account=${{ secrets.BILLING_ACCOUNT }},org_id=${{ secrets.ORG_ID }},gemini_api_key=${{ secrets.GEMINI_API_KEY }},slack_api_token=${{ secrets.SLACK_API_TOKEN }}
           format: true
