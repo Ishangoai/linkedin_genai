@@ -24,6 +24,7 @@ jobs:
         uses: opentofu/setup-opentofu@v1
         with:
           tofu_version: latest
+          tofu_wrapper: false
 
       - id: 'auth'
         name: 'Authenticate to Google Cloud'
@@ -37,21 +38,31 @@ jobs:
       #     gcloud config set project linkedin-genai
 
 
-
-      - name: Tofu Init
-        run: tofu init
-        working-directory: opentofu
-
-      # - name: unlock
-      #   run: |                     
-      #     tofu force-unlock -force 1741771029517362
-
-      - name: Tofu Format
-        run: tofu fmt -check
-        working-directory: opentofu
-
-      - name: Tofu Plan
-        run: tofu plan -var="billing_account=${{ secrets.BILLING_ACCOUNT }}" -var="org_id=${{ secrets.ORG_ID }}"
-        working-directory: opentofu
+      - name: Plan Terraform
+        uses: op5dev/tf-via-pr@v13
         env:
           TF_LOG: trace
+        with:
+          working-directory: opentofu
+          command: plan # ${{ github.event_name == 'push' && 'apply' || 'plan' }}
+          arg-lock: false
+          arg-var: billing_account=${{ secrets.BILLING_ACCOUNT }},org_id=${{ secrets.ORG_ID }}
+          format: true
+
+      # - name: Tofu Init
+      #   run: tofu init
+      #   working-directory: opentofu
+
+      # - name: unlock
+      #   run: |
+      #     tofu force-unlock -force 1741771029517362
+
+      # - name: Tofu Format
+      #   run: tofu fmt -check
+      #   working-directory: opentofu
+
+      # - name: Tofu Plan
+      #   run: tofu plan -var="billing_account=${{ secrets.BILLING_ACCOUNT }}" -var="org_id=${{ secrets.ORG_ID }}"
+      #   working-directory: opentofu
+      #   env:
+      #     TF_LOG: trace
