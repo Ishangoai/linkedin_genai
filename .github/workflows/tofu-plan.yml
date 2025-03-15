@@ -36,6 +36,11 @@ jobs:
       #   run: |
       #     gcloud config set project linkedin-genai
 
+      - name: unlock
+        run: |
+          tofu force-unlock 1741771029517362
+
+
       - name: Tofu Init
         run: tofu init
         working-directory: opentofu
