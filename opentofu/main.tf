@@ -1,4 +1,4 @@
-# Variable definitions for sensitive data
+# Variable definitions for sensitive data.
 variable "gemini_api_key" {
   description = "API key for Gemini"
   type        = string
