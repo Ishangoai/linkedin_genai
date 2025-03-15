@@ -38,7 +38,7 @@ jobs:
 
       - name: unlock
         run: |
-          tofu force-unlock 1741771029517362
+          tofu force-unlock -force 1741771029517362
 
 
       - name: Tofu Init
