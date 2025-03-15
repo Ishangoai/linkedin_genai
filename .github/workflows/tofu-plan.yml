@@ -42,9 +42,9 @@ jobs:
         run: tofu init
         working-directory: opentofu
 
-      - name: unlock
-        run: |                     
-          tofu force-unlock -force 1741771029517362
+      # - name: unlock
+      #   run: |                     
+      #     tofu force-unlock -force 1741771029517362
 
       - name: Tofu Format
         run: tofu fmt -check
