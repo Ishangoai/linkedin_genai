@@ -46,7 +46,7 @@ jobs:
           working-directory: opentofu
           command: plan # ${{ github.event_name == 'push' && 'apply' || 'plan' }}
           arg-lock: false
-          arg-var: billing_account=${{ secrets.BILLING_ACCOUNT }},org_id=${{ secrets.ORG_ID }}
+          arg-var: billing_account=${{ secrets.BILLING_ACCOUNT }},org_id=${{ secrets.ORG_ID }},gemini_api_key=${{ secrets.GEMINI_API_KEY }},slack_api_token=${{ secrets.SLACK_API_TOKEN }}
           format: true
           tool: tofu
 
