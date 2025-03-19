@@ -1,12 +1,11 @@
 terraform {
   backend "gcs" {
-    bucket = "linkedin_genai_bucket"
-    prefix = "terraform/state"
+    bucket = "state_bucket4"
+    prefix = "tofu"
   }
 }
 
 # Provider configuration (optional, if not using Application Default Credentials)
-# provider "google" {
-#   project     = "linkedin-genai"
-#   credentials = file("credentials.json")  # Uncomment if using a service account key
-# }
+provider "google" {
+  project     = var.gcp_project_name
+}

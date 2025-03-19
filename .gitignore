@@ -199,3 +199,5 @@ opentofu/.env
 
 # macOS-specific files (if applicable)
 opentofu/.DS_Store
+
+tofu-key.json
