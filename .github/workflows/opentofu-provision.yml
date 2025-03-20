@@ -40,8 +40,8 @@ jobs:
         name: Authenticate to Google Cloud
         uses: google-github-actions/auth@v2
         with:
-          workload_identity_provider: projects/427938065788/locations/global/workloadIdentityPools/linkedin-genai-pool/providers/github
-          service_account: linkedin-genai-service@linkedin-genai.iam.gserviceaccount.com
+          workload_identity_provider: projects/${{ secrets.PROJECT_NUMBER }}/locations/global/workloadIdentityPools/github/providers/github
+          service_account: tf-provision@${{ secrets.GCP_PROJECT_NAME }}.iam.gserviceaccount.com
 
       - name: Provision OpenTofu
         uses: op5dev/tf-via-pr@v13
