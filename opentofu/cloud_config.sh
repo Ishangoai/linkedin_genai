@@ -2,6 +2,7 @@ gcloud projects create $GCP_PROJECT_NAME
 PROJECT_NUMBER=$(gcloud projects describe "$GCP_PROJECT_NAME" --format="value(projectNumber)")
 
 # you need to link a project to a billing account to be able to use it
+# gcloud projects add-iam-policy-binding $GCP_PROJECT_NAME --member="user:oliver@ishango.ai" --role="roles/owner"
 # gcloud billing projects link $GCP_PROJECT_NAME --billing-account=01AC44-DF4B27-C9AF71
 
 gcloud storage buckets create gs://${GCP_PROJECT_NAME}_state_bucket \
@@ -9,11 +10,8 @@ gcloud storage buckets create gs://${GCP_PROJECT_NAME}_state_bucket \
     --default-storage-class=STANDARD \
     --location=EUROPE-WEST2 \
     --uniform-bucket-level-access \
-    --public-access-prevention \
-    # --enable-hierarchical-namespace
+    --public-access-prevention 
 
-# gcloud storage folders create --recursive gs://state_bucket3/tofu/
-# gsutil cp -n /dev/null gs://state_bucket3/tofu/state.tfstate
 
 gcloud iam service-accounts create tf-provision \
     --project=$GCP_PROJECT_NAME \

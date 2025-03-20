@@ -1,6 +1,5 @@
 terraform {
   backend "gcs" {
-    bucket = "state_bucket4"
     prefix = "tofu"
   }
 }

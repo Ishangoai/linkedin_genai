@@ -3,8 +3,8 @@ resource "google_artifact_registry_repository" "linkedin_genai_gcr" {
     format                 = "DOCKER"
     location               = "europe-west2"
     mode                   = "STANDARD_REPOSITORY"
-    project                = "vincenttest3"
-    repository_id          = "linkedin-genai-gcr"
+    project                = var.gcp_project_name
+    repository_id          = "${var.gcp_project_name}-gcr"
 }
 
 # # terraform import google_artifact_registry_repository.linkedin_genai_gcr projects/linkedin-genai/locations/europe-west2/repositories/linkedin-genai-gcr
