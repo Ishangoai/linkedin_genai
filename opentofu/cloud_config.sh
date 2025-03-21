@@ -73,3 +73,5 @@ echo $GOOGLE_CREDENTIALS
 echo "Done Setting up initial GCP config. Initialize tofu with \$ tofu init -backend-config=\"bucket=${GCP_PROJECT_NAME}_state_bucket\""
 
 gcloud services enable iamcredentials.googleapis.com --project=$GCP_PROJECT_NAME
+gcloud services enable artifactregistry.googleapis.com --project=$GCP_PROJECT_NAME
+
