@@ -65,7 +65,7 @@ gcloud iam workload-identity-pools providers create-oidc "github" \
 gcloud iam service-accounts add-iam-policy-binding "tf-provision@${GCP_PROJECT_NAME}.iam.gserviceaccount.com" \
   --project="${GCP_PROJECT_NAME}" \
   --role="roles/iam.workloadIdentityUser" \
-  --member="principalSet://iam.googleapis.com/projects/${PROJECT_NUMBER}/locations/global/workloadIdentityPools/github/attribute.event_name/pull_request"
+  --member="principalSet://iam.googleapis.com/projects/${PROJECT_NUMBER}/locations/global/workloadIdentityPools/github/attribute.event_name/push"
 
 export GOOGLE_CREDENTIALS="$(cat tofu-key.json)"
 echo $GOOGLE_CREDENTIALS
