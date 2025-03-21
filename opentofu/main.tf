@@ -1,10 +1,10 @@
 resource "google_artifact_registry_repository" "linkedin_genai_gcr" {
-    cleanup_policy_dry_run = true
-    format                 = "DOCKER"
-    location               = "europe-west2"
-    mode                   = "STANDARD_REPOSITORY"
-    project                = var.gcp_project_name
-    repository_id          = "${var.gcp_project_name}-gcr"
+  cleanup_policy_dry_run = true
+  format                 = "DOCKER"
+  location               = "europe-west2"
+  mode                   = "STANDARD_REPOSITORY"
+  project                = var.gcp_project_name
+  repository_id          = "${var.gcp_project_name}-gcr"
 }
 
 
