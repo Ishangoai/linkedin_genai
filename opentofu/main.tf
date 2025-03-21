@@ -7,6 +7,7 @@ resource "google_artifact_registry_repository" "linkedin_genai_gcr" {
     repository_id          = "${var.gcp_project_name}-gcr"
 }
 
+
 # # terraform import google_artifact_registry_repository.linkedin_genai_gcr projects/linkedin-genai/locations/europe-west2/repositories/linkedin-genai-gcr
 
 # resource "google_project" "linkedin_genai" {
