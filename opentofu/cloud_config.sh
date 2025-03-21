@@ -5,7 +5,7 @@ PROJECT_NUMBER=$(gcloud projects describe "$GCP_PROJECT_NAME" --format="value(pr
 
 # you need to link a project to a billing account to be able to use it
 gcloud projects add-iam-policy-binding $GCP_PROJECT_NAME --member="user:oliver@ishango.ai" --role="roles/owner"
-read -p "Continue?"
+read -p "Waiting for billing account to be enabled... Continue?"
 # gcloud billing projects link $GCP_PROJECT_NAME --billing-account=01AC44-DF4B27-C9AF71
 
 gcloud storage buckets create gs://${GCP_PROJECT_NAME}_state_bucket \
