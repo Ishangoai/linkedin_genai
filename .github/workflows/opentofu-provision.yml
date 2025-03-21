@@ -51,7 +51,7 @@ jobs:
           arg-lock: ${{ github.event_name == 'push' }} # true
           arg-lock-timeout: 5m
           arg-var: billing_account=${{ secrets.BILLING_ACCOUNT }},org_id=${{ secrets.ORG_ID }},gemini_api_key=${{ secrets.GEMINI_API_KEY }},slack_api_token=${{ secrets.SLACK_API_TOKEN }}
-          arg-backend-config: bucket=${GCP_PROJECT_NAME}_state_bucket
+          arg-backend-config: bucket=${{ secrets.GCP_PROJECT_NAME }}_state_bucket
           format: true
           validate: true
           tool: tofu
