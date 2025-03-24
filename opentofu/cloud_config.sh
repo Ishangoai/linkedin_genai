@@ -8,7 +8,7 @@ gcloud projects add-iam-policy-binding $GCP_PROJECT_NAME --member="user:oliver@i
 read -p "Waiting for billing account to be enabled... Continue?"
 # gcloud billing projects link $GCP_PROJECT_NAME --billing-account=01AC44-DF4B27-C9AF71
 
-gcloud storage buckets create gs://${GCP_PROJECT_NAME}_state_bucket \
+gcloud storage buckets create gs://${GCP_PROJECT_NAME}-state-bucket \
     --project=$GCP_PROJECT_NAME \
     --default-storage-class=STANDARD \
     --location=EUROPE-WEST2 \
@@ -34,7 +34,7 @@ gcloud iam service-accounts keys create tofu-key.json \
 # echo $GOOGLE_CREDENTIALS
 
 # workload identity - github actions will be able to authenticate as the service account without needing to store the key
-MAX_RETRIES=3
+MAX_RETRIES=10
 RETRY_DELAY=10
 
 for i in $(seq 1 $MAX_RETRIES); do
@@ -70,7 +70,7 @@ gcloud iam service-accounts add-iam-policy-binding "tf-provision@${GCP_PROJECT_N
 export GOOGLE_CREDENTIALS="$(cat tofu-key.json)"
 echo $GOOGLE_CREDENTIALS
 
-echo "Done Setting up initial GCP config. Initialize tofu with \$ tofu init -backend-config=\"bucket=${GCP_PROJECT_NAME}_state_bucket\""
+echo "Done Setting up initial GCP config. Initialize tofu with \$ tofu init -backend-config=\"bucket=${GCP_PROJECT_NAME}-state-bucket\""
 
 gcloud services enable iamcredentials.googleapis.com --project=$GCP_PROJECT_NAME
 gcloud services enable artifactregistry.googleapis.com --project=$GCP_PROJECT_NAME
