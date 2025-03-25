@@ -1,4 +1,4 @@
-resource "google_artifact_registry_repository" "${var.gcp_project_name}-gcr" {
+resource "google_artifact_registry_repository" "artifact_registry_repository" {
   cleanup_policy_dry_run = true
   format                 = "DOCKER"
   location               = "europe-west2"
@@ -13,7 +13,7 @@ resource "google_service_account" "cloud_run_service_account" {
   project      = var.gcp_project_name
 }
 
-resource "google_cloud_run_v2_service" "${var.gcp_project_name}-service" {
+resource "google_cloud_run_v2_service" "cloud_run_service" {
   client         = "gcloud"
   client_version = "511.0.0"
   ingress        = "INGRESS_TRAFFIC_ALL"
