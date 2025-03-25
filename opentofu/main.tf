@@ -20,7 +20,7 @@ resource "google_cloud_run_v2_service" "cloud_run_service" {
   launch_stage   = "GA"
   location       = "europe-west2"
   name           = "${var.gcp_project_name}-service"
-  project        = "${var.gcp_project_name}"
+  project        = var.gcp_project_name
   template {
     containers {
       env {
