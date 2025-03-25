@@ -62,6 +62,7 @@ gcloud iam workload-identity-pools providers create-oidc "github" \
   --attribute-condition="attribute.event_name == 'push' || attribute.event_name == 'pull_request'" \
   --issuer-uri="https://token.actions.githubusercontent.com"
 
+
 gcloud iam service-accounts add-iam-policy-binding "tf-provision@${GCP_PROJECT_NAME}.iam.gserviceaccount.com" \
   --project="${GCP_PROJECT_NAME}" \
   --role="roles/iam.workloadIdentityUser" \
