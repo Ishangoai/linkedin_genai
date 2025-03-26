@@ -75,4 +75,4 @@ echo "Done Setting up initial GCP config. Initialize tofu with \$ tofu init -bac
 
 gcloud services enable iamcredentials.googleapis.com --project=$GCP_PROJECT_NAME
 gcloud services enable artifactregistry.googleapis.com --project=$GCP_PROJECT_NAME
-
+gcloud services enable iam.googleapis.com --project=$GCP_PROJECT_NAME
