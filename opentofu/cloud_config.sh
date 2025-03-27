@@ -71,7 +71,7 @@ gcloud iam service-accounts add-iam-policy-binding "tf-provision@${GCP_PROJECT_N
 export GOOGLE_CREDENTIALS="$(cat tofu-key.json)"
 echo $GOOGLE_CREDENTIALS
 
-echo "Done Setting up initial GCP config. Initialize tofu with \$ tofu init -backend-config=\"bucket=${GCP_PROJECT_NAME}-state-bucket\""
+tofu init -backend-config="bucket=${GCP_PROJECT_NAME}-state-bucket"
 
 gcloud services enable iamcredentials.googleapis.com --project=$GCP_PROJECT_NAME
 gcloud services enable artifactregistry.googleapis.com --project=$GCP_PROJECT_NAME
