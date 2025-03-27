@@ -23,14 +23,14 @@ resource "google_service_account" "cloud_run_service_account" {
 }
 
 resource "google_cloud_run_v2_service" "cloud_run_service" {
-  client         = "gcloud"
-  client_version = "511.0.0"
-  ingress        = "INGRESS_TRAFFIC_ALL"
-  launch_stage   = "GA"
-  location       = "europe-west2"
-  name           = "${var.gcp_project_name}-service"
-  project        = var.gcp_project_name
-  deletion_protection=false
+  client              = "gcloud"
+  client_version      = "511.0.0"
+  ingress             = "INGRESS_TRAFFIC_ALL"
+  launch_stage        = "GA"
+  location            = "europe-west2"
+  name                = "${var.gcp_project_name}-service"
+  project             = var.gcp_project_name
+  deletion_protection = false
   template {
     containers {
       env {
