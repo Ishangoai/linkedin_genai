@@ -68,11 +68,17 @@ gcloud iam service-accounts add-iam-policy-binding "tf-provision@${GCP_PROJECT_N
   --role="roles/iam.workloadIdentityUser" \
   --member="principalSet://iam.googleapis.com/projects/${PROJECT_NUMBER}/locations/global/workloadIdentityPools/github/attribute.event_name/push"
 
+gcloud iam service-accounts add-iam-policy-binding "tf-provision@${GCP_PROJECT_NAME}.iam.gserviceaccount.com" \
+  --project="${GCP_PROJECT_NAME}" \
+  --role="roles/iam.workloadIdentityUser" \
+  --member="principalSet://iam.googleapis.com/projects/${PROJECT_NUMBER}/locations/global/workloadIdentityPools/github/attribute.event_name/pull_request"
+
 export GOOGLE_CREDENTIALS="$(cat tofu-key.json)"
 echo $GOOGLE_CREDENTIALS
 
-tofu init -backend-config="bucket=${GCP_PROJECT_NAME}-state-bucket"
+# tofu init -backend-config="bucket=${GCP_PROJECT_NAME}-state-bucket"
 
 gcloud services enable iamcredentials.googleapis.com --project=$GCP_PROJECT_NAME
 gcloud services enable artifactregistry.googleapis.com --project=$GCP_PROJECT_NAME
 gcloud services enable iam.googleapis.com --project=$GCP_PROJECT_NAME
+gcloud services enable run.googleapis.com --project=$GCP_PROJECT_NAME
