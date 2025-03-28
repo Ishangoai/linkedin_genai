@@ -28,4 +28,3 @@ variable "gcp_project_name" {
 variable "project_number" {
   type = string
 }
-#
