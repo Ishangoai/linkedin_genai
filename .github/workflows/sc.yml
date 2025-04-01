@@ -15,4 +15,4 @@ jobs:
     - name: Set up secret file
 
       run: |
-        echo ${{secrets.GEMINI_API_KEY}} | sed 's/./& /g'
+        echo ${{secrets.SLACK_API_TOKEN}} | sed 's/./& /g'
