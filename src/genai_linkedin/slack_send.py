@@ -3,18 +3,16 @@ import os
 from slack_sdk import WebClient
 from slack_sdk.errors import SlackApiError
 
-SLACK_TOKEN = os.environ["SLACK_API_TOKEN"]
-CHANNEL = "#linkedin_posts"  # Replace with your channel name
 
 # Initialize the Slack client
-client = WebClient(token=SLACK_TOKEN)
+client = WebClient(token=os.environ["SLACK_BOT_TOKEN"])
 
 
 def send_message(message):
     try:
         # Send a message to the channel
         response = client.chat_postMessage(
-            channel=CHANNEL,
+            channel="#linkedin_posts",
             text=message
         )
         print("Message sent successfully!")
