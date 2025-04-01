@@ -37,8 +37,8 @@ resource "google_cloud_run_v2_service" "cloud_run_service" {
         value = var.gemini_api_key
       }
       env {
-        name  = "SLACK_API_TOKEN"
-        value = var.slack_api_token
+        name  = "SLACK_BOT_TOKEN"
+        value = var.slack_bot_token
       }
       image = "us-docker.pkg.dev/cloudrun/container/hello"
       name  = "${var.gcp_project_name}-image-1"
