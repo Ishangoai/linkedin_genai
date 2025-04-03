@@ -34,7 +34,7 @@ def send_response():
 @app.post("/slack/events")
 async def webhook(request: Request):
 
-    if not is_valid_signature(request):
+    if not await is_valid_signature(request):
         # if slack challenge request
         if request.method == "GET":
             # Handle the URL verification challenge
@@ -50,6 +50,7 @@ async def webhook(request: Request):
         # Send a reply in the channel
         response = webhook.send(text=f"Hi {form['user_name']}, you sent: {text}")
         # Acknowledge this request
+        print(response.status_code)
         return Response("", 200)
 
     if "command" in form \
@@ -63,6 +64,7 @@ async def webhook(request: Request):
         # Send a reply in the channel
         response = webhook.send(text=message)
         # Acknowledge this request
+        print(response.status_code)
         return Response("", 200)
 
     else:
