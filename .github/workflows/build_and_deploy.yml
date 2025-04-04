@@ -139,4 +139,5 @@ jobs:
             --allow-unauthenticated \
             --set-env-vars GEMINI_API_KEY=${{ secrets.GEMINI_API_KEY }} \
             --set-env-vars SLACK_BOT_TOKEN=${{ secrets.SLACK_BOT_TOKEN }} \
+            --set-env-vars SLACK_SIGNING_SECRET=${{ secrets.SLACK_SIGNING_SECRET }} \
             --project ${{ env.PROJECT_ID }}
