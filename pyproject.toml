@@ -21,6 +21,7 @@ dependencies = [
     "fastapi",
     "uvicorn",
     "slack_sdk",
+    "python-multipart",
 ]
 
 [project.urls]
