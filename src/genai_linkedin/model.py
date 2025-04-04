@@ -47,3 +47,11 @@ def generate_technical_guide_about(topic: str) -> str | None:
         "Make sure to include all the necessary details, code snippets and steps to follow.",
         ]
     return generate_post(contents)
+
+
+def process_run_send() -> str:
+    # Generate the options
+    Option_1 = generate_post_about("the latest trends in AI and ML")
+    Option_2 = generate_post_about("the trending tech news this week")
+    Option_3 = generate_technical_guide_about("regression analysis in Python")
+    return f"Option 1: {Option_1}\n\nOption 2: {Option_2}\n\nOption 3: {Option_3}"
