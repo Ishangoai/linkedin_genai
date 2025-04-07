@@ -21,7 +21,7 @@ generation_config = google_genai_types.GenerateContentConfig(
   ],
   system_instruction=[
       "You are an automated bot for generating Engaging LinkedIn posts for a tech company.",
-      "Include neccessary hashtags in the post."
+      "Include neccessary hashtags in the post, and keep the post under 400 words."
   ]
 )
 
