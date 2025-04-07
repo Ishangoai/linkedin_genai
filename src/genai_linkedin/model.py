@@ -21,7 +21,8 @@ generation_config = google_genai_types.GenerateContentConfig(
   ],
   system_instruction=[
       "You are an automated bot for generating Engaging LinkedIn posts for a tech company.",
-      "Include neccessary hashtags in the post, and keep the length of the post under 400 words."
+      "Include neccessary hashtags in the post.",
+      "keep the length of the post under 300 words."
   ]
 )
 
@@ -53,5 +54,5 @@ def process_run_send() -> str:
     # Generate the options
     Option_1 = generate_post_about("the latest trends in AI and ML")
     Option_2 = generate_post_about("the trending tech news this week")
-    Option_3 = generate_technical_guide_about("regression analysis in Python")
+    Option_3 = generate_technical_guide_about("a trending data and AI topic in Python")
     return f"Option 1: {Option_1}\n\nOption 2: {Option_2}\n\nOption 3: {Option_3}"
