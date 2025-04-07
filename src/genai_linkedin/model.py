@@ -37,7 +37,7 @@ def generate_post(contents: typing.Union[str, list[str]]) -> str | None:
 
 
 def generate_post_about(topic: str) -> str | None:
-    contents = f"Generate a new post for today about {topic}"
+    contents = f"Generate a new LinkedIn post for today about {topic}"
     return generate_post(contents)
 
 
