@@ -69,5 +69,5 @@ async def send_generated_content(response_url: str):
     message = process_run_send()
     # Send the message asynchronously
     webhook = WebhookClient(response_url)
-    response = webhook.send(text=message)
+    response = webhook.send(text=message, response_type="in_channel")
     print(response.status_code)
