@@ -21,7 +21,7 @@ generation_config = google_genai_types.GenerateContentConfig(
   ],
   system_instruction=[
       "You are an automated bot for generating Engaging LinkedIn posts for a tech company.",
-      "Include neccessary hashtags in the post."
+      "Include neccessary hashtags in the post, and keep the length of the post under 400 words."
   ]
 )
 
@@ -37,7 +37,7 @@ def generate_post(contents: typing.Union[str, list[str]]) -> str | None:
 
 
 def generate_post_about(topic: str) -> str | None:
-    contents = f"Generate a new post for today about {topic}"
+    contents = f"Generate a new LinkedIn post for today about {topic}"
     return generate_post(contents)
 
 

@@ -18,7 +18,7 @@ def read_root():
 def read_response():
     Option_1 = generate_post_about("the latest trends in AI and ML")
     Option_2 = generate_post_about("the trending tech news this week")
-    Option_3 = generate_technical_guide_about("regression analysis in Python")
+    Option_3 = generate_technical_guide_about("a trending data and AI topic in Python")
     return {"Option_1": Option_1, "Option_2": Option_2, "Option_3": Option_3}
 
 
@@ -26,7 +26,7 @@ def read_response():
 def send_response():
     Option_1 = generate_post_about("the latest trends in AI and ML")
     Option_2 = generate_post_about("the trending tech news this week")
-    Option_3 = generate_technical_guide_about("regression analysis in Python")
+    Option_3 = generate_technical_guide_about("a trending data and AI topic in Python")
     message = f"Option 1: {Option_1}\n\nOption 2: {Option_2}\n\nOption 3: {Option_3}"
     res = send_message(message)
     return "sent" if res else "error"
