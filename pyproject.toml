@@ -8,7 +8,7 @@ requires-python = "==3.12.9"
 
 authors =  [
     {name = "Oliver Angelil", email = "oliver@ishango.ai"},
-    {name = "Vincent Aduuna Frimpong", email = "vincent@ishango.ai"}
+    {name = "Vincent Frimpong", email = "vincent@ishango.ai"}
 ]
 
 dependencies = [
